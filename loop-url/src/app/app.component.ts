@@ -693,7 +693,7 @@ export class AppComponent implements OnInit {
   constructor(private sanitizer : DomSanitizer) { }
 
   ngOnInit() {;
-    this.urlshare = "https://finviz.com/quote.ashx?t="+this.shares[this.i].name+"&ty=c&ta=0&p=w&b=1";
+    this.urlshare = "https://elite.finviz.com/quote.ashx?t="+this.shares[this.i].name+"&ty=c&ta=2&p=i15&b=1";
   }
 
   getEmbedUrl(){
@@ -704,12 +704,12 @@ export class AppComponent implements OnInit {
     if(this.i<(this.shares.length-1)){
       this.i++;
     }
-    this.urlshare = "https://finviz.com/quote.ashx?t="+this.shares[this.i].name+"&ty=c&ta=0&p=w&b=1";
+    this.urlshare = "https://elite.finviz.com/quote.ashx?t="+this.shares[this.i].name+"&ty=c&ta=2&p=i15&b=1";
   }
   previousShare(){
     if(this.i>0){
       this.i--;
     }
-    this.urlshare = "https://finviz.com/quote.ashx?t="+this.shares[this.i].name+"&ty=c&ta=0&p=w&b=1";
+    this.urlshare = "https://elite.finviz.com/quote.ashx?t="+this.shares[this.i].name+"&ty=c&ta=2&p=i15&b=1";
   }
 }
