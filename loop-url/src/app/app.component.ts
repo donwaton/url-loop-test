@@ -8,6 +8,7 @@ import { Shares } from './domain/shares';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  actualizar = false;
   periodo = "i15";
   i = 0;
   urlshare = "";
@@ -27,7 +28,9 @@ export class AppComponent implements OnInit {
     let testsplit = data.split('   ');
     localStorage.setItem('shares', JSON.stringify(testsplit));
     this.shares = JSON.parse(localStorage.getItem("shares"));
+    this.i=0;
     this.urlshare = "https://elite.finviz.com/quote.ashx?t="+this.shares[this.i]+"&ty=c&ta=2&p="+this.periodo+"&b=1";
+    this.actualizar = false;
   }
 
   getEmbedUrl(){
@@ -50,5 +53,9 @@ export class AppComponent implements OnInit {
   updateTime(tiempo){
     this.periodo = tiempo;
     this.urlshare = "https://elite.finviz.com/quote.ashx?t="+this.shares[this.i]+"&ty=c&ta=2&p="+this.periodo+"&b=1";
+  }
+
+  openUpdate(){
+    this.actualizar = !this.actualizar;
   }
 }
