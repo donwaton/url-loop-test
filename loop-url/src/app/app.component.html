@@ -1,5 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
+<textarea id="data" name="data" #data></textarea> 
+<button type="button" class="btn btn-primary" (click)="updateSharesList(data.value)">Cargar</button>
+
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="inlineRadioOptions" #radio15 (click)="updateTime(radio15.value)" id="inlineRadio1" value="i15" checked>
   <label class="form-check-label" for="inlineRadio1">15 Min</label>
