@@ -8,7 +8,7 @@ import { Shares } from './domain/shares';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-
+  periodo = "i15";
   i = 0;
   urlshare = "";
   shares: Shares[] = [
@@ -692,8 +692,9 @@ export class AppComponent implements OnInit {
 
   constructor(private sanitizer : DomSanitizer) { }
 
-  ngOnInit() {;
-    this.urlshare = "https://elite.finviz.com/quote.ashx?t="+this.shares[this.i].name+"&ty=c&ta=2&p=i15&b=1";
+  ngOnInit() {
+    console.log(this.periodo);
+    this.urlshare = "https://elite.finviz.com/quote.ashx?t="+this.shares[this.i].name+"&ty=c&ta=2&p="+this.periodo+"&b=1";
   }
 
   getEmbedUrl(){
@@ -704,12 +705,17 @@ export class AppComponent implements OnInit {
     if(this.i<(this.shares.length-1)){
       this.i++;
     }
-    this.urlshare = "https://elite.finviz.com/quote.ashx?t="+this.shares[this.i].name+"&ty=c&ta=2&p=i15&b=1";
+    this.urlshare = "https://elite.finviz.com/quote.ashx?t="+this.shares[this.i].name+"&ty=c&ta=2&p="+this.periodo+"&b=1";
   }
   previousShare(){
     if(this.i>0){
       this.i--;
     }
-    this.urlshare = "https://elite.finviz.com/quote.ashx?t="+this.shares[this.i].name+"&ty=c&ta=2&p=i15&b=1";
+    this.urlshare = "https://elite.finviz.com/quote.ashx?t="+this.shares[this.i].name+"&ty=c&ta=2&p="+this.periodo+"&b=1";
+  }
+
+  updateTime(tiempo){
+    this.periodo = tiempo;
+    this.urlshare = "https://elite.finviz.com/quote.ashx?t="+this.shares[this.i].name+"&ty=c&ta=2&p="+this.periodo+"&b=1";
   }
 }

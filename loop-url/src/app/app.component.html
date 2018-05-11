@@ -1,7 +1,18 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
-<!--
--->
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="inlineRadioOptions" #radio15 (click)="updateTime(radio15.value)" id="inlineRadio1" value="i15" checked>
+  <label class="form-check-label" for="inlineRadio1">15 Min</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="inlineRadioOptions" #radiod (click)="updateTime(radiod.value)" id="inlineRadio2" value="d">
+  <label class="form-check-label" for="inlineRadio2">Daily</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="inlineRadioOptions" #radiow (click)="updateTime(radiow.value)" id="inlineRadio3" value="w">
+  <label class="form-check-label" for="inlineRadio3">Weekly</label>
+</div>
+
 <button (click)="previousShare()">Anterior</button>
 <button (click)="nextShare()">Siguiente</button>
 
