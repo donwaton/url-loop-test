@@ -78,7 +78,9 @@ export class AppComponent implements OnInit {
       }, this.refreshTime);
     } 
     else {
+      this.autoupdate = false;
       this.setUrl();
+      alert("Fin");
     }
   }
   
