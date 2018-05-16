@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   autoupdate = false;
   actualizar = false;
   periodo = "i15";
+  refreshTime = 2500;
   i = 0;
   urlshare = "";
   urldetail = "";
@@ -70,20 +71,21 @@ export class AppComponent implements OnInit {
   autoUpdate(){
     if(this.autoupdate == true && this.i < (this.shares.length - 1)){
       setTimeout(() => {
-        this.nextShare(); 
-        this.autoUpdate();
-      }, 5000);
+        if(this.autoupdate == true){
+          this.nextShare(); 
+          this.autoUpdate();
+        }
+      }, this.refreshTime);
     } 
-    if(this.autoupdate == true && this.i == (this.shares.length - 1)){
-      this.i=0;
-      this.autoUpdate();
-    }
     else {
       this.setUrl();
     }
   }
   
-  setAutoUpdate() {
+  setAutoUpdate(speed) {
+    if(speed!=""){
+      this.refreshTime = speed*1000;
+    }
     this.autoupdate = !this.autoupdate;
     if (this.autoupdate == true && this.i < (this.shares.length - 1)) {
       this.autoUpdate();
@@ -91,5 +93,10 @@ export class AppComponent implements OnInit {
     else {
       this.setUrl();
     }     
+  }
+
+  restart(){
+    this.i=0;
+    this.setUrl();
   }
 }
