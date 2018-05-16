@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Shares } from './domain/shares';
+import { timeout } from 'q';
 
 @Component({
   selector: 'app-root',
@@ -8,54 +9,87 @@ import { Shares } from './domain/shares';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  autoupdate = false;
   actualizar = false;
   periodo = "i15";
   i = 0;
   urlshare = "";
-  shares = localStorage.getItem("shares");
+  urldetail = "";
+  shares = JSON.parse(localStorage.getItem("shares"));
+  //BKD   ELGX   CPRX   TYME   TRXC   CPRX   QUIK   VBIV   MFIN   FBIO   NBEV
 
-  constructor(private sanitizer : DomSanitizer) { 
-   
-  }
+  constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
-    console.log(this.shares);
-    this.urlshare = "https://elite.finviz.com/quote.ashx?t="+this.shares[this.i]+"&ty=c&ta=2&p="+this.periodo+"&b=1";
+    this.setUrl();
+  }
+  
+  setUrl(){
+    this.urldetail = "https://www.barchart.com/stocks/quotes/" + this.shares[this.i] + "/interactive-chart";
+    this.urlshare = "https://elite.finviz.com/quote.ashx?t=" + this.shares[this.i] + "&ty=c&ta=2&p=" + this.periodo + "&b=1";
   }
 
-  updateSharesList(data){
+  updateSharesList(data) {
     localStorage.removeItem('shares');
     let testsplit = data.split('   ');
     localStorage.setItem('shares', JSON.stringify(testsplit));
     this.shares = JSON.parse(localStorage.getItem("shares"));
-    this.i=0;
-    this.urlshare = "https://elite.finviz.com/quote.ashx?t="+this.shares[this.i]+"&ty=c&ta=2&p="+this.periodo+"&b=1";
+    this.i = 0;
+    this.setUrl();
     this.actualizar = false;
   }
 
-  getEmbedUrl(){
+  getEmbedUrl() {
     return this.sanitizer.bypassSecurityTrustResourceUrl(this.urlshare);
   }
 
-  nextShare(){
-    if(this.i<(this.shares.length-1)){
+  nextShare() {
+    if (this.i < (this.shares.length - 1)) {
       this.i++;
     }
-    this.urlshare = "https://elite.finviz.com/quote.ashx?t="+this.shares[this.i]+"&ty=c&ta=2&p="+this.periodo+"&b=1";
+    this.setUrl();
+    console.log(this.shares[this.i]);
   }
-  previousShare(){
-    if(this.i>0){
+
+  previousShare() {
+    if (this.i > 0) {
       this.i--;
     }
-    this.urlshare = "https://elite.finviz.com/quote.ashx?t="+this.shares[this.i]+"&ty=c&ta=2&p="+this.periodo+"&b=1";
+    this.setUrl();
   }
 
-  updateTime(tiempo){
+  updateTime(tiempo) {
     this.periodo = tiempo;
-    this.urlshare = "https://elite.finviz.com/quote.ashx?t="+this.shares[this.i]+"&ty=c&ta=2&p="+this.periodo+"&b=1";
+    this.setUrl();
   }
 
-  openUpdate(){
+  openUpdate() {
     this.actualizar = !this.actualizar;
+  }
+
+  autoUpdate(){
+    if(this.autoupdate == true && this.i < (this.shares.length - 1)){
+      setTimeout(() => {
+        this.nextShare(); 
+        this.autoUpdate();
+      }, 5000);
+    } 
+    if(this.autoupdate == true && this.i == (this.shares.length - 1)){
+      this.i=0;
+      this.autoUpdate();
+    }
+    else {
+      this.setUrl();
+    }
+  }
+  
+  setAutoUpdate() {
+    this.autoupdate = !this.autoupdate;
+    if (this.autoupdate == true && this.i < (this.shares.length - 1)) {
+      this.autoUpdate();
+    }
+    else {
+      this.setUrl();
+    }     
   }
 }

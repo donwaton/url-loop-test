@@ -1,35 +1,44 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="inlineRadioOptions" #radio5 (click)="updateTime(radio5.value)" id="inlineRadio1" value="i5">
-  <label class="form-check-label" for="inlineRadio1">5 Min</label>
+<div align="right">
+  <div class="form-check form-check-inline form-control-sm">
+    <input class="form-check-input" type="radio" name="inlineRadioOptions" #radio5 (click)="updateTime(radio5.value)" id="inlineRadio1"
+    value="i5">
+    <label class="form-check-label" for="inlineRadio1">5 Min</label>
+  </div>
+  <div class="form-check form-check-inline form-control-sm">
+    <input class="form-check-input" type="radio" name="inlineRadioOptions" #radio15 (click)="updateTime(radio15.value)" id="inlineRadio1"
+    value="i15" checked>
+    <label class="form-check-label" for="inlineRadio1">15 Min</label>
+  </div>
+  <div class="form-check form-check-inline form-control-sm">
+    <input class="form-check-input" type="radio" name="inlineRadioOptions" #radiod (click)="updateTime(radiod.value)" id="inlineRadio2"
+    value="d">
+    <label class="form-check-label" for="inlineRadio2">Daily</label>
+  </div>
+  <div class="form-check form-check-inline form-control-sm">
+    <input class="form-check-input" type="radio" name="inlineRadioOptions" #radiow (click)="updateTime(radiow.value)" id="inlineRadio3"
+    value="w">
+    <label class="form-check-label" for="inlineRadio3">Weekly</label>
+  </div>
+  <div class="form-check form-check-inline form-control-sm">
+    <input class="form-check-input" type="radio" name="inlineRadioOptions" #radiom (click)="updateTime(radiom.value)" id="inlineRadio3"
+    value="w">
+    <label class="form-check-label" for="inlineRadio3">Monthly</label>
+  </div>
+  
+  <a [href]="urldetail" target="_blank" class="btn btn-dark btn-sm" style="margin-left:5px;">Detalles</a>
+  
+  <button type="button" class="btn btn-info btn-sm" style="margin-left:5px;" (click)="previousShare()">Anterior</button>
+  <button type="button" class="btn btn-primary btn-sm" style="margin-left:5px;" (click)="nextShare()">Siguiente</button>
+  <button type="button" class="btn btn-sm" [class.btn-success]="!autoupdate" [class.btn-danger]="autoupdate" style="margin-left:5px;" (click)="setAutoUpdate()">AutoLoop</button>
+  <button type="button" class="btn btn-warning btn-sm"  style="margin-left:5px;" (click)="openUpdate()">Actualizar Lista</button>
 </div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="inlineRadioOptions" #radio15 (click)="updateTime(radio15.value)" id="inlineRadio1" value="i15" checked>
-  <label class="form-check-label" for="inlineRadio1">15 Min</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="inlineRadioOptions" #radiod (click)="updateTime(radiod.value)" id="inlineRadio2" value="d">
-  <label class="form-check-label" for="inlineRadio2">Daily</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="inlineRadioOptions" #radiow (click)="updateTime(radiow.value)" id="inlineRadio3" value="w">
-  <label class="form-check-label" for="inlineRadio3">Weekly</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="inlineRadioOptions" #radiom (click)="updateTime(radiom.value)" id="inlineRadio3" value="w">
-  <label class="form-check-label" for="inlineRadio3">Monthly</label>
-</div>
-
-<button type="button" class="btn btn-info" style="margin-left:5px;"(click)="previousShare()">Anterior</button>
-<button type="button" class="btn btn-primary" style="margin-left:5px;" (click)="nextShare()">Siguiente</button>
-<button type="button" class="btn btn-warning" style ="position: absolute; right: 0px;" (click)="openUpdate()">Actualizar Lista</button>
-
 <div *ngIf="actualizar == true">
-  <textarea id="data" name="data" #data class="form-control"></textarea> 
-  <button type="button" class="btn btn-success" (click)="updateSharesList(data.value)" style ="float: right;">Cargar</button>
+  <textarea id="data" name="data" #data class="form-control"></textarea>
+  <button type="button" class="btn btn-success" (click)="updateSharesList(data.value)" style="float: right; right: 0px;">Cargar</button>
 </div>
-
 <div>
   <iframe [src]="getEmbedUrl()" width="100%" height="900"></iframe>
 </div>
-
+<!--
+-->
