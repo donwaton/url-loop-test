@@ -1,5 +1,5 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div align="right" class="form-inline" style="float: right; right: 0px;">
+<div align="right" class="form-inline no-print" style="float: right; right: 0px;">
   <div class="form-check form-check-inline form-control-sm" style="width:45px;">
     <input class="form-check-input" type="radio" name="inlineRadioOptions" #radio1 (click)="updateTime(radio1.value)" id="inlineRadio1"
       value="i1">
@@ -45,14 +45,15 @@
       <button type="button" class="btn btn-sm" [class.btn-success]="!autoupdate" [class.btn-danger]="autoupdate" style="margin-left:5px;"
         (click)="setAutoUpdate(speed.value)">Auto</button>
       <button type="button" class="btn btn-primary btn-sm" style="margin-left:5px;" (click)="restart()">Restart</button>
+      <button type="button" class="btn btn-dark btn-sm" style="margin-left:5px;" onclick="window.print();">Imprimir</button>
       <button type="button" class="btn btn-warning btn-sm" style="margin-left:5px;" (click)="openUpdate()">Lista</button>
 </div>
-<div *ngIf="actualizar == true">
+<div *ngIf="actualizar == true" class="no-print">
   <textarea id="data" name="data" #data class="form-control"></textarea>
   <button type="button" class="btn btn-success" (click)="updateSharesList(data.value)" style="float: right; right: 0px;">Cargar</button>
 </div>
 <div>
-  <iframe [src]="getEmbedUrl()" width="100%" height="900"></iframe>
+  <iframe [src]="getEmbedUrl()" width="100%" height="1400"></iframe>
 </div>
 <!--
 -->
